@@ -1,7 +1,7 @@
 @url = http://localhost:5000
 
 ###
-GET {{url}}/reservations
+GET {{url}}/parking-spots
 
 ###
 POST {{url}}/reservations/vehicle

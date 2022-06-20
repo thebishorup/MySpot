@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
+using MySpot.Application.Abstractions;
 using MySpot.Core.Abstractions;
 using MySpot.Infrastructure.DAL;
 using MySpot.Infrastructure.Exceptions;
@@ -27,6 +28,15 @@ namespace MySpot.Infrastructure
             services
                 .AddPostgres(configuration)
                 .AddSingleton<IClock, Clock>();
+
+            // automatically detech queries hadlers to register into IOC container
+            var infrastructureAssembly = typeof(AppOptions).Assembly;
+
+            services.Scan(s =>
+            s.FromAssemblies(infrastructureAssembly)
+                .AddClasses(c => c.AssignableTo(typeof(IQueryHandler<,>)))
+                .AsImplementedInterfaces()
+                .WithScopedLifetime());
 
             return services;
         }

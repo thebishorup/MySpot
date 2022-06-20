@@ -1,3 +1,5 @@
-﻿namespace MySpot.Application.Command;
+﻿using MySpot.Application.Abstractions;
 
-public sealed record ChangeReservationLicensePlate(Guid ReservationId, string LicensePlate);
+namespace MySpot.Application.Command;
+
+public sealed record ChangeReservationLicensePlate(Guid ReservationId, string LicensePlate) : ICommand;
