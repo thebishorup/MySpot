@@ -2,7 +2,9 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
+using MySpot.Application.Abstractions;
 using MySpot.Core.Repositories;
+using MySpot.Infrastructure.DAL.Decorators;
 using MySpot.Infrastructure.DAL.Repositories;
 
 namespace MySpot.Infrastructure.DAL;
@@ -22,6 +24,10 @@ public static class Extensions
 
         services.AddScoped<IWeeklyParkingSpotRepository, PostgresWeeklyParkingSpotRepository>();
         services.AddHostedService<DatabaseInitilizer>();
+        services.AddScoped<IUnitOfWork, PostgresUnitOfWork>();
+
+        // register the decorator
+        services.TryDecorate(typeof(ICommandHandler<>), typeof(UnitOfWorkCommandHandlerDecorator<>));
 
         AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
