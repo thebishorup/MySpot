@@ -1,0 +1,24 @@
+2022-06-23 00:13:57.674 -05:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2022-06-23 00:13:57.806 -05:00 [INF] Entity Framework Core 6.0.5 initialized 'MySpotDbContext' using provider 'Npgsql.EntityFrameworkCore.PostgreSQL:6.0.5+9d79af6e2586d5d28da253ac075706a5575a1743' with options: SensitiveDataLoggingEnabled 
+2022-06-23 00:13:58.148 -05:00 [INF] Executed DbCommand (45ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (SELECT 1 FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace WHERE c.relname='__EFMigrationsHistory');
+2022-06-23 00:13:58.167 -05:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (SELECT 1 FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace WHERE c.relname='__EFMigrationsHistory');
+2022-06-23 00:13:58.179 -05:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2022-06-23 00:13:58.192 -05:00 [INF] No migrations were applied. The database is already up to date.
+2022-06-23 00:13:58.337 -05:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "WeeklyParkingSpots" AS w)
+2022-06-23 00:13:58.425 -05:00 [INF] Now listening on: http://localhost:5000
+2022-06-23 00:13:58.428 -05:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-06-23 00:13:58.428 -05:00 [INF] Hosting environment: Development
+2022-06-23 00:13:58.429 -05:00 [INF] Content root path: D:\Learning\MySpot\src\MySpot.Api\
+2022-06-23 00:14:24.921 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/ - -
+2022-06-23 00:14:25.002 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/ - - - 404 0 - 83.3716ms
+2022-06-23 00:14:50.766 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/ - -
+2022-06-23 00:15:14.674 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/ - - - 404 0 - 23907.5693ms
+2022-06-23 00:15:18.309 -05:00 [INF] Application is shutting down...
