@@ -20,5 +20,13 @@ namespace MySpot.Infrastructure.DAL.Queries
                     Date = x.Date.Value.Date
                 })
             };
+
+        public static UserDto AsDto(this User user)
+            => new()
+            {
+                Id = user.Id,
+                UserName = user.UserName,
+                FullName = user.FullName
+            };
     }
 }

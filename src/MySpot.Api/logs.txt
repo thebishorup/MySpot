@@ -22,3 +22,48 @@ SELECT EXISTS (
 2022-06-23 00:14:50.766 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/ - -
 2022-06-23 00:15:14.674 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/ - - - 404 0 - 23907.5693ms
 2022-06-23 00:15:18.309 -05:00 [INF] Application is shutting down...
+2022-06-26 01:08:40.968 -05:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2022-06-26 01:08:41.083 -05:00 [INF] Entity Framework Core 6.0.5 initialized 'MySpotDbContext' using provider 'Npgsql.EntityFrameworkCore.PostgreSQL:6.0.5+9d79af6e2586d5d28da253ac075706a5575a1743' with options: SensitiveDataLoggingEnabled 
+2022-06-26 01:08:48.831 -05:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2022-06-26 01:08:48.955 -05:00 [INF] Entity Framework Core 6.0.5 initialized 'MySpotDbContext' using provider 'Npgsql.EntityFrameworkCore.PostgreSQL:6.0.5+9d79af6e2586d5d28da253ac075706a5575a1743' with options: SensitiveDataLoggingEnabled 
+2022-06-26 01:08:49.280 -05:00 [INF] Executed DbCommand (45ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (SELECT 1 FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace WHERE c.relname='__EFMigrationsHistory');
+2022-06-26 01:08:49.298 -05:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (SELECT 1 FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace WHERE c.relname='__EFMigrationsHistory');
+2022-06-26 01:08:49.309 -05:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2022-06-26 01:08:49.323 -05:00 [INF] Applying migration '20220626060841_Added_Users'.
+2022-06-26 01:08:49.370 -05:00 [INF] Executed DbCommand (9ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE "Reservation" ADD "UserId" uuid NULL;
+2022-06-26 01:08:49.389 -05:00 [INF] Executed DbCommand (16ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "Users" (
+    "Id" uuid NOT NULL,
+    "Email" character varying(100) NOT NULL,
+    "UserName" character varying(30) NOT NULL,
+    "Password" character varying(200) NOT NULL,
+    "FullName" character varying(100) NOT NULL,
+    "Role" character varying(30) NOT NULL,
+    "CreatedAt" timestamp without time zone NOT NULL,
+    CONSTRAINT "PK_Users" PRIMARY KEY ("Id")
+);
+2022-06-26 01:08:49.393 -05:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_Reservation_UserId" ON "Reservation" ("UserId");
+2022-06-26 01:08:49.397 -05:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE UNIQUE INDEX "IX_Users_Email" ON "Users" ("Email");
+2022-06-26 01:08:49.400 -05:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE UNIQUE INDEX "IX_Users_UserName" ON "Users" ("UserName");
+2022-06-26 01:08:49.406 -05:00 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE "Reservation" ADD CONSTRAINT "FK_Reservation_Users_UserId" FOREIGN KEY ("UserId") REFERENCES "Users" ("Id") ON DELETE CASCADE;
+2022-06-26 01:08:49.409 -05:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
+VALUES ('20220626060841_Added_Users', '6.0.5');
+2022-06-26 01:08:49.560 -05:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "WeeklyParkingSpots" AS w)
+2022-06-26 01:08:49.641 -05:00 [INF] Now listening on: http://localhost:5000
+2022-06-26 01:08:49.644 -05:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-06-26 01:08:49.645 -05:00 [INF] Hosting environment: Development
+2022-06-26 01:08:49.645 -05:00 [INF] Content root path: D:\Learning\MySpot\src\MySpot.Api\

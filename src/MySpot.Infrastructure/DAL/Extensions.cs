@@ -23,6 +23,7 @@ public static class Extensions
         });
 
         services.AddScoped<IWeeklyParkingSpotRepository, PostgresWeeklyParkingSpotRepository>();
+        services.AddScoped<IUserRepository, PostgresUserRepository>();
         services.AddHostedService<DatabaseInitilizer>();
         services.AddScoped<IUnitOfWork, PostgresUnitOfWork>();
 
