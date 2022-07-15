@@ -31,7 +31,7 @@ namespace MySpot.Application.Command.Handlers
             if (!_passwordManager.Validate(command.Password, user.Password))
                 throw new InvalidCredentialsException();
 
-            var jwt = _authenticator.CreateToken(user.Id);
+            var jwt = _authenticator.CreateToken(user.Id, user.Role);
 
             _tokenStorage.Set(jwt);
         }

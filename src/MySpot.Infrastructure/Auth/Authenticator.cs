@@ -31,13 +31,14 @@ namespace MySpot.Infrastructure.Auth
                 SecurityAlgorithms.HmacSha256);
         }
 
-        public JwtDto CreateToken(Guid userId)
+        public JwtDto CreateToken(Guid userId, string role)
         {
             var now = _clock.Current();
             var claims = new List<Claim>
             {
-                new Claim(Microsoft.IdentityModel.JsonWebTokens.JwtRegisteredClaimNames.Sub, userId.ToString()),
-                new(JwtRegisteredClaimNames.UniqueName, userId.ToString())
+                new(Microsoft.IdentityModel.JsonWebTokens.JwtRegisteredClaimNames.Sub, userId.ToString()),
+                new(JwtRegisteredClaimNames.UniqueName, userId.ToString()),
+                new(ClaimTypes.Role, role)
             };
 
             var expires = now.Add(_expiry);

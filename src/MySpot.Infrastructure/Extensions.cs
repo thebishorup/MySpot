@@ -54,11 +54,10 @@ namespace MySpot.Infrastructure
         {
             // register middlewares
             app.UseMiddleware<ExceptionMiddleware>();
-
-            app.MapControllers();
-
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.MapControllers();
 
             return app;
         }

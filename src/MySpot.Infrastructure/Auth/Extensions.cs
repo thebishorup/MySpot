@@ -38,6 +38,14 @@ namespace MySpot.Infrastructure.Auth
                     };
                 });
 
+            services.AddAuthorization(authorization =>
+            {
+                authorization.AddPolicy("is-admin", policy =>
+                {
+                    policy.RequireRole("admin");
+                });
+            });
+
             return services;
         }
     }
