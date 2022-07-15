@@ -1,7 +1,6 @@
 ﻿using MySpot.Application.Abstractions;
 using MySpot.Application.Exceptions;
 using MySpot.Application.Security;
-using MySpot.Core.Abstractions;
 using MySpot.Core.Repositories;
 
 namespace MySpot.Application.Command.Handlers
@@ -10,12 +9,17 @@ namespace MySpot.Application.Command.Handlers
     {
         private readonly IPasswordManager _passwordManager;
         private readonly IUserRepository _userRepository;
+        private readonly IAuthenticator _authenticator;
+        private readonly ITokenStorage _tokenStorage;
 
         public SignInHandler(IPasswordManager passwordManager, 
-            IUserRepository userRepository)
+            IUserRepository userRepository, IAuthenticator authenticator,
+            ITokenStorage tokenStorage)
         {
             _passwordManager = passwordManager;
             _userRepository = userRepository;
+            _authenticator = authenticator;
+            _tokenStorage = tokenStorage;
         }
 
         public async Task HandleAsync(SignIn command)
@@ -26,6 +30,10 @@ namespace MySpot.Application.Command.Handlers
 
             if (!_passwordManager.Validate(command.Password, user.Password))
                 throw new InvalidCredentialsException();
+
+            var jwt = _authenticator.CreateToken(user.Id);
+
+            _tokenStorage.Set(jwt);
         }
     }
 }
