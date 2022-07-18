@@ -1,25 +1,27 @@
 @url = http://localhost:5000
 @reservationId = 00000000-0000-0000-0000-000000000001
 @parkingSpotId = 00000000-0000-0000-0000-000000000001
-@userId = 00000000-0000-0000-0000-000000000001
+@userId = c740c1a5-42d5-457a-a6fc-0642939c1cb3
 
 
 ###
 GET {{url}}/users
+Authorization: Bearer {{accessToken}}
 
 ###
 GET {{url}}/users/{{userId}}
+Authorization: Bearer {{accessToken}}
 
 ###
 POST {{url}}/users
 Content-Type: application/json
 
 {
-    "email": "user1@myspot.io",
-    "username": "user1",
+    "email": "admin@myspot.io",
+    "username": "admin",
     "password": "secret",
     "fullName": "John Doe",
-    "role": "user"
+    "role": "admin"
 }
 
 ###
@@ -28,7 +30,7 @@ POST {{url}}/users/sign-in
 Content-Type: application/json
 
 {
-    "email": "user1@myspot.io",
+    "email": "admin@myspot.io",
     "password": "secret"
 }
 

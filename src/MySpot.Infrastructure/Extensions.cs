@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.OpenApi.Models;
 
 using MySpot.Application.Abstractions;
 using MySpot.Core.Abstractions;
@@ -14,6 +15,7 @@ using MySpot.Infrastructure.Time;
 using System.Runtime.CompilerServices;
 
 [assembly: InternalsVisibleTo("MySpot.Tests.Unit")]
+[assembly: InternalsVisibleTo("MySpot.Tests.Integration")]
 namespace MySpot.Infrastructure
 {
     public static class Extensions
@@ -35,6 +37,14 @@ namespace MySpot.Infrastructure
 
             services.AddCustomLogging();
             services.AddSecurity();
+            services.AddSwaggerGen(swagger =>
+            {
+                swagger.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Version = "v1",
+                    Title = "MySpot API"
+                });
+            });
 
             // automatically detech queries hadlers to register into IOC container
             var infrastructureAssembly = typeof(AppOptions).Assembly;
@@ -54,6 +64,13 @@ namespace MySpot.Infrastructure
         {
             // register middlewares
             app.UseMiddleware<ExceptionMiddleware>();
+            app.UseSwagger();
+            app.UseReDoc(reDoc =>
+            {
+                reDoc.RoutePrefix = "docs";
+                reDoc.SpecUrl("/swagger/v1/swagger.json");
+                reDoc.DocumentTitle = "MySpot API";
+            });
             app.UseAuthentication();
             app.UseAuthorization();
 
