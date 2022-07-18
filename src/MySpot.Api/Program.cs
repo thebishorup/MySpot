@@ -1,3 +1,4 @@
+using MySpot.Api.Api;
 using MySpot.Application;
 using MySpot.Core;
 using MySpot.Infrastructure;
@@ -22,4 +23,8 @@ builder.Host.UseSerilog(((context, configuration) =>
 
 var app = builder.Build();
 app.UseInfrastructure();
+
+// Minimal API
+app.UseUsersApi();
+
 app.Run();

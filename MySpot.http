@@ -90,8 +90,8 @@ POST {{url}}/api/users
 Content-Type: application/json
 
 {
-    "email": "user1@myspot.io",
-    "username": "user1",
+    "email": "user10@myspot.io",
+    "username": "user10",
     "password": "secret",
     "fullName": "John Doe",
     "role": "user"
